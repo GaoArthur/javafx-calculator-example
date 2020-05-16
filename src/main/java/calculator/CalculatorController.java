@@ -33,6 +33,7 @@ public class CalculatorController {
         startNumber = false;
     }
 
+
     @FXML
     public void processOperator(ActionEvent event) {
         String operatorPressed = ((Button) event.getSource()).getText();
@@ -43,9 +44,11 @@ public class CalculatorController {
             }
             double number2 = Double.parseDouble(display.getText());
             double result = calculator.calculate(number1, number2, operator);
-            display.setText(String.format("%.0f", result));
+            display.setText(String.valueOf(result));
             operator = "";
-        } else {
+        }else if(operatorPressed.equals(".")){
+            display.setText(display.getText()+".");
+        }else {
             if (!operator.isEmpty()) {
                 return;
             }
@@ -65,16 +68,11 @@ public class CalculatorController {
     }
 
     @FXML
-    public void processDot(ActionEvent event) {
-
-    }
-
-    @FXML
     public void processSign(ActionEvent event) {
         String SignPressed = ((Button) event.getSource()).getText();
         System.out.println(SignPressed);
         number1 = Double.parseDouble(display.getText())* (-1);
-        display.setText(String.format("%.0f", number1));
+        display.setText(String.valueOf(number1));
     }
 
 }
